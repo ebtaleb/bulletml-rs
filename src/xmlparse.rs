@@ -18,18 +18,25 @@ fn main() {
     let mut depth = 0;
     for e in parser.events() {
         match e {
-            XmlEvent::StartElement { name, .. } => {
-                println!("{}+{}", indent(depth), name);
+            XmlEvent::StartElement { name, attributes, .. } => {
+                println!("{}+{} {:?}", indent(depth), name, attributes);
                 depth += 1;
             }
+
             XmlEvent::EndElement { name } => {
                 depth -= 1;
                 println!("{}-{}", indent(depth), name);
             }
+
+            XmlEvent::Characters(s) => {
+                println!("{} {}", indent(depth), s);
+            }
+
             XmlEvent::Error(e) => {
                 println!("Error: {}", e);
                 break;
             }
+
             _ => {}
         }
     }
