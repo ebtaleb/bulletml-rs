@@ -1,10 +1,13 @@
 [package]
-name = "bulletml"
+name = "bulletml-rsgame"
 version = "0.1.0"
 authors = ["jmbto <kagekyio@gmail.com>"]
 
 [dependencies]
 xml-rs = "*"
+log = "*"
+env_logger = "*"
+
 [dependencies.piston]
 git = "https://github.com/pistondevelopers/piston"
 [dependencies.pistoncore-sdl2_window]
@@ -13,6 +16,9 @@ git = "https://github.com/pistondevelopers/sdl2_window"
 git = "https://github.com/pistondevelopers/opengl_graphics"
 [dependencies.piston2d-graphics]
 git = "https://github.com/pistondevelopers/graphics"
+
+[dependencies.bulletml]
+path = "./src/bulletml"
 
 [[bin]]
 name = "papars"

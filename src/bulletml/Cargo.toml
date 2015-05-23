@@ -1,0 +1,4 @@
+[package]
+name = "bulletml"
+version = "0.1.0"
+authors = ["jmbto <kagekyio@gmail.com>"]

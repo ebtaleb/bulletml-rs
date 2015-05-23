@@ -1,8 +1,11 @@
+#[derive(Debug)]
 pub enum BarrageType {
     HorizontalBarrage,
-    VerticalBarrage
+    VerticalBarrage,
+    NoBarrage
 }
 
+#[derive(Debug)]
 pub enum AttributeType {
     Aim,
     Absolute,
@@ -10,65 +13,75 @@ pub enum AttributeType {
     Sequence
 }
 
+#[derive(Debug)]
 pub enum BulletAttributes {
-    Repeat { times: uint, action : Action },
-    ChangeSpeed { direction: Speed, term: uint },
-    ChangeDirection { direction: Direction, term: uint },
+    Repeat { times: u32, action : Action },
+    ChangeSpeed { direction: Speed, term: u32 },
+    ChangeDirection { direction: Direction, term: u32 },
     Accel { horizontal: Option<Horizontal>,
             vertical: Option<Vertical>,
-            term: uint },
-    Wait(uint),
+            term: u32 },
+    Wait(u32),
     Vanish
 }
 
+#[derive(Debug)]
 pub enum Action {
-    ActionDef { label: Option<str>,
+    ActionDef { label: Option<String>,
                 actions : Vec<Action>,
                 tofire : Vec<Fire>,
                 contents : Vec<BulletAttributes>},
     ActionRef(Box<Action>)
 }
 
+#[derive(Debug)]
 pub enum Bullet {
-    BulletDef { label: str,
+    BulletDef { label: Option<String>,
                 direction: Option<Direction>,
                 speed: Option<Speed>,
                 actions: Vec<Action>},
-    BulletRef(Box<Bullet>)
+    BulletRef(Box<Bullet>),
+    NoBullet
 }
 
+#[derive(Debug)]
 pub enum Fire {
-    FireDef { label: str,
+    FireDef { label: Option<String>,
               direction: Option<Direction>,
               speed: Option<Speed>,
               bullet: Bullet },
     FireRef(Box<Fire>)
 }
 
+#[derive(Debug)]
 pub struct Direction {
     dirtype : AttributeType,
-    number: int
+    number: i32
 }
 
+#[derive(Debug)]
 pub struct Speed {
     spetype : AttributeType,
-    number: int
+    number: i32
 }
 
+#[derive(Debug)]
 pub struct Horizontal  {
     spetype : AttributeType,
-    number: int
+    number: i32
 }
 
+#[derive(Debug)]
 pub struct Vertical {
     spetype : AttributeType,
-    number: int
+    number: i32
 }
 
+#[derive(Debug)]
 pub struct BulletMLBody {
-    attribute : BarrageType,
-    tofire : Vec<Fire>,
-    bullets : Vec<Bullet>,
-    actions : Vec<Action>
+    pub attribute : BarrageType,
+    pub tofire : Vec<Fire>,
+    pub bullets : Vec<Bullet>,
+    pub actions : Vec<Action>
 }
 
